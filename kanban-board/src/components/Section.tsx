@@ -1,10 +1,10 @@
 import LoadTask from "./task/LoadTask";
 import { useRef, useState } from "react";
-import { addTask } from "../utils/tasks";
+import { addTask, type TaskType } from "../utils/tasks";
 import { getData } from "../utils/shared";
 
-function InProgress() {
-   console.log("InProgress Rendered");
+function Section({ section }: { section: TaskType }) {
+   console.log("TODO Rendered");
    const [loadPage, setLoadPage] = useState(false);
 
    const titleRef = useRef<HTMLInputElement>(null);
@@ -18,7 +18,7 @@ function InProgress() {
          alert('Provide valid title');
 
       } else {
-         addTask(getData('currUser').username, 'inprogress', title!, description ? description : '');
+         addTask(getData('currUser').username, section, title!, description ? description : '');
          alert('Task added successfully');
          const newLoadPage = !loadPage;
          setLoadPage(newLoadPage);
@@ -26,8 +26,8 @@ function InProgress() {
    }
 
    return (
-      <div className="border-2 p-2 m-3">
-         <div className="text-5xl">InProgress Section</div>
+      <div id="todo" className="border-2 p-2 m-3">
+         <div className="text-4xl m-2">{section}</div>
          <div className="flex flex-col">
             <p>*Title</p>
             <input placeholder="Title goes here" className="border"
@@ -41,10 +41,10 @@ function InProgress() {
          </div>
 
          <div className="flex flex-row gap-1 flex-wrap justify-center">
-            <LoadTask section={'inprogress'} />
+            <LoadTask section={section} />
          </div>
       </div>
    )
 }
 
-export default InProgress;
+export default Section;

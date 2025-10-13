@@ -1,14 +1,15 @@
 import { getData } from "../utils/shared";
 import "../assets/tailwind.css"
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 
 function UserInfo() {
    console.log("UserInfo Rendered");
-   const navigate = useNavigate();
+   // const navigate = useNavigate();
 
    const handleLogout = function() {
       localStorage.removeItem("currUser");
-      navigate("/login");
+      // navigate("/login");
+      window.location.href = '/login';
    };
 
    return (

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getKanbanBoard, type TaskType } from "../../utils/tasks";
-import TaskInfo from "./TaskInfo";
+import Task from "./Task";
 
 function LoadTask({ section }: {section: TaskType}) {
    console.log("LoadTask Rendered");
@@ -17,7 +17,7 @@ function LoadTask({ section }: {section: TaskType}) {
       <>
          {kanbanBoard?.map(function(task) {
             if (task.type === section) {
-               return <TaskInfo key={task.id} id={task.id} title={task.title} description={task.description ? task.description : ''} createdBy={task.createdBy}
+               return <Task key={task.id} id={task.id} title={task.title} description={task.description ? task.description : ''} createdBy={task.createdBy}
                onUpdate={handleUpdate} />
             }
          })}
