@@ -23,9 +23,10 @@ function TaskInfo({ id, title, description, createdBy }: {id: number, title: str
             {description}
          </div>
          <p>Created By: <span className="font-bold">{createdBy}</span></p>
-         <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded" onClick={showAssignedUsers}>See Assigned Users</button>
+         <button className="bg-blue-500 text-white font-semibold py-2 px-2 rounded" onClick={showAssignedUsers}>See Assigned Users</button>
          <div> {assignedUsers} </div>
          <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded m-2">Edit</button>
+         <button className="bg-red-500 text-white font-semibold py-2 px-4 rounded m-2">Delete</button>
       </div>
    );
 }

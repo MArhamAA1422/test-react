@@ -1,4 +1,4 @@
-import { getData } from "./shared";
+import { getData, setData } from "./shared";
 
 export type TaskType = 'todo' | 'inprogress' | 'testing' | 'finished';
 
@@ -29,6 +29,25 @@ export function getAssignedUsers(taskID: number) {
    return userList;
 }
 
-export function addTask() {
-   
+export function addTask(username: string, section: TaskType, title: string, description: string) {
+   let kanbanBoard: KanbanBoardType = getData('kanbanBoard');
+
+   if (!kanbanBoard) kanbanBoard = [];
+
+   let ID = getData('taskId');
+   if (ID === null) ID = 0;
+
+   const id = ID + 1;
+   setData('taskId', JSON.stringify(ID+1));
+
+   kanbanBoard.push({
+      id,
+      title,
+      type: section,
+      createdBy: username,
+      description,
+      assignedUser: [],
+   });
+
+   setData('kanbanBoard', JSON.stringify(kanbanBoard));
 }

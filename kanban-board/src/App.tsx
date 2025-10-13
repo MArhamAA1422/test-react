@@ -7,7 +7,6 @@ import UserInfo from './components/UserInfo'
 
 function App() {
   console.log("App Rendered");
-  // window.location.href="/";
   return (
     <>
       <UserInfo />
