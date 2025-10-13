@@ -64,3 +64,44 @@ export function deleteTask(taskID: number) {
 
    setData('kanbanBoard', JSON.stringify(kanbanBoard));
 }
+
+export function updateTask(taskID: number, title: string, description: string, section: TaskType, assignedUser: string) {
+   let kanbanBoard: KanbanBoardType = getData('kanbanBoard');
+
+   kanbanBoard = kanbanBoard.map(function(task) {
+      if (task.id - taskID === 0) {
+         task.title = title;
+         task.description = description;
+         task.type = section;
+         let found = false;
+         task.assignedUser?.forEach(function(user) {
+            if (user === assignedUser) {
+               found = true;
+            }
+         });
+         if (!found) task.assignedUser?.push(assignedUser);
+      }
+      return task;
+   });
+
+   // console.log(kanbanBoard);
+
+   setData('kanbanBoard', JSON.stringify(kanbanBoard));
+}
+
+export function taskInfo(taskID: number) {
+   const kanbanBoard = getKanbanBoard();
+   let taskInfo:Task = {
+      id: -1,
+      title: '',
+      type: 'todo',
+      createdBy: '',
+      description: '',
+   }
+   kanbanBoard?.forEach(function(task) {
+      if (task.id === taskID) {
+         taskInfo = task;
+      }
+   });
+   return taskInfo;
+}

@@ -9,8 +9,7 @@ function Login() {
    const passwordRef = useRef<HTMLInputElement>(null);
    const navigate = useNavigate();
 
-   const handleLogin = function(e: React.FormEvent) {
-      e.preventDefault();
+   const handleLogin = function() {
       const email = emailRef.current?.value;
       const password = passwordRef.current?.value;
 
@@ -37,7 +36,7 @@ function Login() {
    }
 
    return (
-      <form className="max-w-sm mx-auto bg-white p-6 rounded-lg shadow-md space-y-4" onSubmit={handleLogin}>
+      <form className="max-w-sm mx-auto bg-white p-6 rounded-lg shadow-md space-y-4">
       <h2 className="text-2xl font-semibold text-gray-700 text-center">Login</h2>
 
       <div>
@@ -69,6 +68,7 @@ function Login() {
       <button
          type="submit"
          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md transition"
+         onClick={handleLogin}
       >
          Login
       </button>

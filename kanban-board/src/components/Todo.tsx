@@ -1,5 +1,4 @@
 import LoadTask from "./task/LoadTask";
-import '../assets/tailwind.css'
 import { useRef, useState } from "react";
 import { addTask } from "../utils/tasks";
 import { getData } from "../utils/shared";

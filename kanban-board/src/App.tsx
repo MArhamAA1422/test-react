@@ -1,4 +1,5 @@
 import './App.css'
+import './assets/tailwind.css'
 import Todo from './components/Todo'
 import InProgress from './components/InProgress'
 import Testing from './components/Testing'
