@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import '../../assets/tailwind.css'
-import { getAssignedUsers } from '../../utils/tasks';
+import { deleteTask, getAssignedUsers } from '../../utils/tasks';
 
-function TaskInfo({ id, title, description, createdBy }: {id: number, title: string, description: string, createdBy: string}) {
+export type OnUpdateType = () => void;
+
+function TaskInfo({ id, title, description, createdBy, onUpdate }: {id: number, title: string, description: string, createdBy: string, onUpdate: OnUpdateType}) {
    console.log("TaskInfo Rendered");
    const [assignedUsers, setAssignedUsers] = useState<string>();
 
@@ -16,6 +18,12 @@ function TaskInfo({ id, title, description, createdBy }: {id: number, title: str
       setAssignedUsers(userListString);
    }
 
+   const handleDelete = function() {
+      deleteTask(id);
+      alert('Task deleted successfully');
+      onUpdate();
+   }
+
    return (
       <div className="border m-2">
          <div>Title: <span className="font-bold">{title}</span></div>
@@ -26,7 +34,7 @@ function TaskInfo({ id, title, description, createdBy }: {id: number, title: str
          <button className="bg-blue-500 text-white font-semibold py-2 px-2 rounded" onClick={showAssignedUsers}>See Assigned Users</button>
          <div> {assignedUsers} </div>
          <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded m-2">Edit</button>
-         <button className="bg-red-500 text-white font-semibold py-2 px-4 rounded m-2">Delete</button>
+         <button className="bg-red-500 text-white font-semibold py-2 px-4 rounded m-2" onClick={handleDelete}>Delete</button>
       </div>
    );
 }

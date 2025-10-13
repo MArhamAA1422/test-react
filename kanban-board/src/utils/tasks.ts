@@ -51,3 +51,16 @@ export function addTask(username: string, section: TaskType, title: string, desc
 
    setData('kanbanBoard', JSON.stringify(kanbanBoard));
 }
+
+export function deleteTask(taskID: number) {
+   let kanbanBoard: KanbanBoardType = getData('kanbanBoard');
+
+   kanbanBoard = kanbanBoard.filter(function(task) {
+      if (task.id - taskID === 0) return false;
+      return true;
+   });
+
+   // console.log(kanbanBoard);
+
+   setData('kanbanBoard', JSON.stringify(kanbanBoard));
+}
