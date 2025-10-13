@@ -17,7 +17,7 @@ function TaskInfo({ id, title, description, createdBy }: {id: number, title: str
    }
 
    return (
-      <div className="border">
+      <div className="border m-2">
          <div>Title: <span className="font-bold">{title}</span></div>
          <div>
             {description}
@@ -25,9 +25,7 @@ function TaskInfo({ id, title, description, createdBy }: {id: number, title: str
          <p>Created By: <span className="font-bold">{createdBy}</span></p>
          <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded" onClick={showAssignedUsers}>See Assigned Users</button>
          <div> {assignedUsers} </div>
-         <div>
-            <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded">Edit</button>
-         </div>
+         <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded m-2">Edit</button>
       </div>
    );
 }

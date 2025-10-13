@@ -32,6 +32,10 @@ function Login() {
       alert('Invalid email or password, authentication failed.');
    }
 
+   const handleCreateAccount = function() {
+      navigate("/registration");
+   }
+
    return (
       <form className="max-w-sm mx-auto bg-white p-6 rounded-lg shadow-md space-y-4" onSubmit={handleLogin}>
       <h2 className="text-2xl font-semibold text-gray-700 text-center">Login</h2>
@@ -68,6 +72,9 @@ function Login() {
       >
          Login
       </button>
+
+      Don't have an account?
+      <div className="font-bold hover:underline cursor-pointer" onClick={handleCreateAccount}>Create account here</div>
       </form>
    );
 }

@@ -44,6 +44,10 @@ function Registration() {
       }
    }
 
+   const handleSignIn = function() {
+      navigate("/login");
+   }
+
    return (
       <form className="max-w-sm mx-auto bg-white p-6 rounded-lg shadow-md space-y-4" onSubmit={handleLogin}>
       <h2 className="text-2xl font-semibold text-gray-700 text-center">Registration</h2>
@@ -93,6 +97,10 @@ function Registration() {
       >
          Registration
       </button>
+
+      Already have account?
+      <div className="font-bold hover:underline cursor-pointer" onClick={handleSignIn}>Sign in</div>
+      
       </form>
    );
 }
