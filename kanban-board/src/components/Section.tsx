@@ -2,6 +2,7 @@ import LoadTask from "./task/LoadTask";
 import { useRef, useState } from "react";
 import { addTask, type TaskType } from "../utils/tasks";
 import { getData } from "../utils/shared";
+import Button from "./Button";
 
 function Section({ section }: { section: TaskType }) {
    console.log("TODO Rendered");
@@ -37,7 +38,7 @@ function Section({ section }: { section: TaskType }) {
             <input placeholder="Task description" className="border" 
             ref={descriptionRef} />
 
-            <button className="bg-green-500 text-white font-semibold py-2 px-4 rounded m-2" onClick={handleAddTask}>Add</button>
+            <Button styles="bg-green-500 text-white font-semibold py-2 px-4 rounded m-2" onClickHandler={handleAddTask}>Add</Button>
          </div>
 
          <div className="flex flex-row gap-1 flex-wrap justify-center">
