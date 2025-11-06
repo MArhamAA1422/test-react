@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import type { TOption, TValidation } from "../utils/types";
 // import { useForm } from "react-hook-form";
 import { isRequired } from "../utils/shared";
-import { FormContext, FormDispatchContext } from "../FormContext";
+import { useFormDataState } from "../FormContext";
 
 type TRadioProps = {
    fieldId: string | undefined,
@@ -25,8 +25,7 @@ function Radio({
    //    formState: { errors },
    // } = useForm<TField>();
 
-   const formContextData = useContext(FormContext);
-   const dispatch = useContext(FormDispatchContext);
+   const {formDataState, setFormDataState} = useFormDataState();
 
    return (
       <div>
@@ -42,9 +41,9 @@ function Radio({
                      checked={checked===option.value}
                      onChange={() => {
                         setChecked(option.value);
-                        dispatch({
-                           ...formContextData,
-                           fieldId: option.value,
+                        setFormDataState({
+                           ...formDataState,
+                           [fieldId!]: option.value,
                         });
                      }}
                       />

@@ -11,7 +11,7 @@ export type TValidation = {
    message: string,
 };
 
-type TCondition = {
+export type TCondition = {
    field: string,
    operator: string,
    value: string,
@@ -26,7 +26,7 @@ export type TField = {
    defaultValue?: string,
    placeholder?: string,
    options?: TOption[],
-   conditions?: TCondition[],
+   condition?: TCondition,
    validations?: TValidation[],
 };
 

@@ -1,18 +1,4 @@
-import type { TForm, TValidation } from "./types";
-
-let formData: TForm;
-
-export async function getFormData() {
-   if (formData) return formData;
-   // console.log("called");
-   await fetch('/test.json')
-      .then(res => res.json())
-      .then((data) => {
-         formData = data;
-      });
-   // console.log(formData);
-   return formData;
-}
+import type { TValidation } from "./types";
 
 export function isRequired(validations: TValidation[] | undefined) {
    let required = '';
@@ -22,4 +8,53 @@ export function isRequired(validations: TValidation[] | undefined) {
       }
    });
    return required;
+}
+
+export function isVisible(conditionField: string, conditionOperator: string, conditionValue: string) {
+   // ===, !==, >, <, >=, <=, includes, !includes
+   // console.log(conditionField, conditionOperator, conditionValue);
+   if (String(conditionValue) === "") return false;
+   switch(conditionOperator) {
+      case "===":
+         if (conditionField === conditionValue) {
+            return true
+         }
+         break;
+      case "!==":
+         if (conditionField !== conditionValue) {
+            return true
+         }
+         break;
+      case ">":
+         if (conditionField > conditionValue) {
+            return true
+         }
+         break;
+      case "<":
+         if (conditionField < conditionValue) {
+            return true
+         }
+         break;
+      case ">=":
+         if (conditionField >= conditionValue) {
+            return true
+         }
+         break;
+      case "<=":
+         if (conditionField <= conditionValue) {
+            return true
+         }
+         break;
+      case "includes":
+         if (conditionField.includes(conditionValue)) {
+            return true
+         }
+         break;
+      case "!includes":
+         if (!conditionField.includes(conditionValue)) {
+            return true
+         }
+         break;
+   }
+   return false
 }
