@@ -1,16 +1,10 @@
 import React, { createContext, useState, useContext } from "react";
-
-export type FormDataState = { [key: string]: string };
-
-type TFormData = {
-  formDataState: FormDataState;
-  setFormDataState: React.Dispatch<React.SetStateAction<FormDataState>>;
-};
+import type { TFormDataState, TFormData } from "./utils/types";
 
 const FormDataContext = createContext<TFormData | undefined>(undefined);
 
 export const FormDataProvider = ({ children }: { children: React.ReactNode }) => {
-  const [formDataState, setFormDataState] = useState<FormDataState>({});
+  const [formDataState, setFormDataState] = useState<TFormDataState>({});
 
   return (
     <FormDataContext.Provider value={{ formDataState, setFormDataState }}>

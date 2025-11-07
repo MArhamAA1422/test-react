@@ -1,4 +1,16 @@
-type FieldType = "text" | "email" | "password" | "number" | "select" | "radio" | "checkbox";
+type FieldType = "text" | "email" | "password" | "number" | "select" | "radio" | "checkbox" | "textarea";
+
+export type TFormDataState = { [key: string]: string };
+
+export type TFormData = {
+  formDataState: TFormDataState;
+  setFormDataState: React.Dispatch<React.SetStateAction<TFormDataState>>;
+};
+
+export type TPrevFormData = {
+  prevFormDataState: TFormDataState;
+  setPrevFormDataState: React.Dispatch<React.SetStateAction<TFormDataState>>;
+};
 
 export type TOption = {
    label: string,
@@ -35,3 +47,29 @@ export type TForm = {
    title: string,
    fields: TField[],
 };
+
+// required, email, minLength, maxLength, pattern, min, max, custom
+export type TRules = {
+   required?: string,
+   email?: string,
+   minLength?: {
+      value: number,
+      message: string,
+   },
+   maxLength?: {
+      value: number,
+      message: string,
+   },
+   pattern?: {
+      value: RegExp,
+      message: string,
+   },
+   min?: {
+      value: number,
+      message: string,
+   },
+   max?: {
+      value: number,
+      message: string
+   },
+}
