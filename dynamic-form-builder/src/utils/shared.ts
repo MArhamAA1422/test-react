@@ -11,6 +11,7 @@ export function getData(key: string) {
 export function setData(key: string, data: string) {
    localStorage.setItem(key, data);
 }
+<<<<<<< HEAD
 
 export function createDependencyTree(fieldData: TField[]) {
    const tree: TFormDataState = {};
@@ -20,6 +21,8 @@ export function createDependencyTree(fieldData: TField[]) {
    console.log(tree);
    return tree;
 }
+=======
+>>>>>>> 2f233b3 (Refactor codebase)
 
 export function isRequired(validations: TValidation[] | undefined) {
    let required = '';
@@ -31,8 +34,21 @@ export function isRequired(validations: TValidation[] | undefined) {
    return required;
 }
 
+<<<<<<< HEAD
 export function checkDependsOn(formDataState: TFormDataState, prevFormDataState: TFormDataState, dependsOn: string | undefined, dependencyTree: TFormDataState) {
    console.log(formDataState[dependsOn!], prevFormDataState[dependsOn!]);
+=======
+export function createDependencyTree(fieldData: TField[]) {
+   const tree: TFormDataState = {};
+   for (const key in fieldData) {
+      tree[fieldData[key].id] = fieldData[key].dependsOn!;
+   }
+   // console.log(tree);
+   return tree;
+}
+
+export function checkDependsOn(formDataState: TFormDataState, prevFormDataState: TFormDataState, dependsOn: string | undefined, dependencyTree: TFormDataState) {
+>>>>>>> 2f233b3 (Refactor codebase)
    if (!dependsOn) return false;
    if (!prevFormDataState[dependsOn!]) return true;
    if (!formDataState[dependsOn!]) return true;
@@ -148,4 +164,8 @@ export const mapValidationsToRules = (validations?: TValidation[]) => {
   });
 
   return rules;
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 2f233b3 (Refactor codebase)

@@ -18,4 +18,8 @@ export const usePrevFormDataState = () => {
   const context = useContext(PrevFormDataContext);
   if (!context) throw new Error("Error in context");
   return context;
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 2f233b3 (Refactor codebase)

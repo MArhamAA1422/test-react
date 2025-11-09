@@ -2,6 +2,11 @@ type FieldType = "text" | "email" | "password" | "number" | "select" | "radio" |
 
 export type TFormDataState = { [key: string]: string };
 
+<<<<<<< HEAD
+=======
+export type TFieldProps = { fieldData: TField }
+
+>>>>>>> 2f233b3 (Refactor codebase)
 export type TFormData = {
   formDataState: TFormDataState;
   setFormDataState: React.Dispatch<React.SetStateAction<TFormDataState>>;
