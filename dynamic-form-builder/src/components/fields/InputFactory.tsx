@@ -4,14 +4,14 @@ import type { TFieldProps } from "../../utils/types";
 import { useFormDataState } from "../../FormContext";
 import { useFormContext } from "react-hook-form";
 import { usePrevFormDataState } from "../../PrevFormContext";
-import { useRef } from "react";
+import { useEffect } from "react";
 
 function InputFactory({
    fieldData
 }: TFieldProps) {
    const { id, condition, dependsOn, placeholder, label, validations, type } = fieldData;
 
-   const textRef = useRef<HTMLInputElement>(null);
+   // const textRef = useRef<HTMLInputElement>(null);
 
    // context api
    const {formDataState, setFormDataState} = useFormDataState();
@@ -21,16 +21,29 @@ function InputFactory({
    const conditionOperator = condition?.operator;
    const conditionValue = condition?.value;
 
-   const { register, formState: { errors } } = useFormContext();
+   const { register, formState: { errors }, resetField } = useFormContext();
 
    const showField = isVisible(formDataState[conditionField!], conditionOperator!, conditionValue!);
 
-   if (dependsOn) {
-      const isChanged = checkDependsOn(formDataState, prevFormDataState, dependsOn, getData('dependencyTree'));
-      if (isChanged && textRef.current) {
-         textRef.current.value = "";
+   const isChanged = checkDependsOn(
+      formDataState,
+      prevFormDataState,
+      dependsOn,
+      getData("dependencyTree")
+   );
+
+   useEffect(() => {
+      if (isChanged) {
+         resetField(id!, { keepDirty: false });
       }
-   }
+   }, [isChanged, resetField, id]);
+
+   // if (dependsOn) {
+   //    const isChanged = checkDependsOn(formDataState, prevFormDataState, dependsOn, getData('dependencyTree'));
+   //    if (isChanged && textRef.current) {
+   //       textRef.current.value = "";
+   //    }
+   // }
 
    if (!showField) {
       return (
@@ -44,6 +57,7 @@ function InputFactory({
       <div className="flex-row gap-2 mt-3">
          <div>{isRequired(validations)} {label}</div>
          <input type={type}
+            key={id}
             placeholder={placeholder?placeholder : ''}
             className="p-1.5 border w-1/2"
             {...register(id!, rules)}
@@ -58,7 +72,7 @@ function InputFactory({
                   [id!]: e.target.value,
                });
             }}
-            ref={textRef}
+            // ref={textRef}
          />
          {errors[id!] && (
          <p className="text-red-500 text-sm">

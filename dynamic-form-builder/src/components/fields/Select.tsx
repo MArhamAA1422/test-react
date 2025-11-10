@@ -4,21 +4,21 @@ import type { TFieldProps } from "../../utils/types";
 import { useFormDataState } from "../../FormContext";
 import { useFormContext } from "react-hook-form";
 import { usePrevFormDataState } from "../../PrevFormContext";
-import { useRef } from "react";
+import { useEffect } from "react";
 
 function Select({
    fieldData
 }: TFieldProps) {
    const { id, validations, condition, dependsOn, label, placeholder, options } = fieldData;
 
-   const optionRef = useRef<HTMLSelectElement>(null);
+   // const optionRef = useRef<HTMLSelectElement>(null);
 
    // context api
    const {formDataState, setFormDataState} = useFormDataState();
    const {prevFormDataState, setPrevFormDataState} = usePrevFormDataState();
 
    // validation
-   const { register, formState: { errors } } = useFormContext();
+   const { register, formState: { errors }, resetField } = useFormContext();
    const rules = mapValidationsToRules(validations);
 
    // conditional stuffs
@@ -27,13 +27,26 @@ function Select({
    const conditionValue = condition?.value;
 
    const showField = isVisible(formDataState[conditionField!], conditionOperator!, conditionValue!);
-   
-   if (dependsOn) {
-      const isChanged = checkDependsOn(formDataState, prevFormDataState, dependsOn, getData('dependencyTree'));
-      if (isChanged && optionRef.current) {
-         optionRef.current.value = "";
+
+   const isChanged = checkDependsOn(
+      formDataState,
+      prevFormDataState,
+      dependsOn,
+      getData("dependencyTree")
+   );
+
+   useEffect(() => {
+      if (isChanged) {
+         resetField(id!, { keepDirty: false });
       }
-   }
+   }, [isChanged, resetField, id]);
+   
+   // if (dependsOn) {
+   //    const isChanged = checkDependsOn(formDataState, prevFormDataState, dependsOn, getData('dependencyTree'));
+   //    if (isChanged && optionRef.current) {
+   //       optionRef.current.value = "";
+   //    }
+   // }
 
    if (!showField) {
       delete formDataState[id!];
@@ -60,7 +73,7 @@ function Select({
                ...formDataState,
                [id!]: e.target.value,
             })}}
-            ref={optionRef}
+            // ref={optionRef}
          >
             <option key={placeholder} value="">{placeholder}</option>
             {options?.map(option => {

@@ -27,18 +27,19 @@ function Radio({
                return (
                   <div key={option.label}>
                      <input type="radio"
-                     value={option.value}
-                     id={option.value}
-                     {...register(id!, rules)}
-                     name={option.label}
-                     checked={checked===option.value}
-                     onChange={() => {
-                        setChecked(option.value);
-                        setFormDataState({
-                           ...formDataState,
-                           [id!]: option.value,
-                        });
-                     }}
+                        key={id}
+                        value={option.value}
+                        id={option.value}
+                        {...register(id!, rules)}
+                        name={option.label}
+                        checked={checked===option.value}
+                        onChange={() => {
+                           setChecked(option.value);
+                           setFormDataState({
+                              ...formDataState,
+                              [id!]: option.value,
+                           });
+                        }}
                       />
                      <label className="ml-1">{option.label}</label>
                      {errors[id!] && (

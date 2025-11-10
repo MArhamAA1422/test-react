@@ -2,7 +2,6 @@ import type { TValidation, TRules, TFormDataState, TField } from "./types";
 
 export function getData(key: string) {
    const jsonValue = localStorage.getItem(key);
-
    const value = jsonValue != null ? JSON.parse(jsonValue) : null;
 
    return value;
@@ -35,7 +34,9 @@ export function checkDependsOn(formDataState: TFormDataState, prevFormDataState:
    if (!dependsOn) return false;
    if (!prevFormDataState[dependsOn!]) return true;
    if (!formDataState[dependsOn!]) return true;
+
    if (formDataState[dependsOn!] === prevFormDataState[dependsOn!]) return checkDependsOn(formDataState, prevFormDataState, dependencyTree[dependsOn], dependencyTree);
+
    return true;
 }
 
@@ -53,46 +54,46 @@ export function isVisible(conditionField: string, conditionOperator: string, con
    switch(conditionOperator) {
       case "===":
          if (conditionField === conditionValue) {
-            return true
+            return true;
          }
          break;
       case "!==":
          if (conditionField !== conditionValue) {
-            return true
+            return true;
          }
          break;
       case ">":
          if (conditionField > conditionValue) {
-            return true
+            return true;
          }
          break;
       case "<":
          if (conditionField < conditionValue) {
-            return true
+            return true;
          }
          break;
       case ">=":
          if (conditionField >= conditionValue) {
-            return true
+            return true;
          }
          break;
       case "<=":
          if (conditionField <= conditionValue) {
-            return true
+            return true;
          }
          break;
       case "includes":
          if (conditionField.includes(conditionValue)) {
-            return true
+            return true;
          }
          break;
       case "!includes":
          if (!conditionField.includes(conditionValue)) {
-            return true
+            return true;
          }
          break;
    }
-   return false
+   return false;
 }
 
 export const mapValidationsToRules = (validations?: TValidation[]) => {
