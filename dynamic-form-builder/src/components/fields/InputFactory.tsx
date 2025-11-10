@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { checkDependsOn, getData, isRequired, isVisible, mapValidationsToRules } from "../../utils/shared";
 import type { TFieldProps } from "../../utils/types";
 import { useFormDataStateContext } from "../../FormContext";
@@ -11,8 +10,6 @@ function InputFactory({
 }: TFieldProps) {
    const { id, condition, dependsOn, placeholder, label, validations, type } = fieldData;
 
-   // const textRef = useRef<HTMLInputElement>(null);
-
    // context api
    const {formDataState, setFormDataState} = useFormDataStateContext();
    const {prevFormDataState, setPrevFormDataState} = usePrevFormDataStateContext();
@@ -22,8 +19,6 @@ function InputFactory({
    const conditionValue = condition?.value;
 
    const { register, formState: { errors }, resetField } = useFormContext();
-
-   const showField = isVisible(formDataState[conditionField!], conditionOperator!, conditionValue!);
 
    const isChanged = checkDependsOn(
       formDataState,
@@ -38,14 +33,7 @@ function InputFactory({
       }
    }, [isChanged, resetField, id]);
 
-   // if (dependsOn) {
-   //    const isChanged = checkDependsOn(formDataState, prevFormDataState, dependsOn, getData('dependencyTree'));
-   //    if (isChanged && textRef.current) {
-   //       textRef.current.value = "";
-   //    }
-   // }
-
-   if (!showField) {
+   if (!isVisible(formDataState[conditionField!], conditionOperator!, conditionValue!)) {
       return (
          <></>
       );
@@ -72,7 +60,6 @@ function InputFactory({
                   [id!]: e.target.value,
                });
             }}
-            // ref={textRef}
          />
          {errors[id!] && (
          <p className="text-red-500 text-sm">

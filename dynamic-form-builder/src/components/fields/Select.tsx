@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { checkDependsOn, getData, isRequired, isVisible, mapValidationsToRules } from "../../utils/shared";
 import type { TFieldProps } from "../../utils/types";
 import { useFormDataStateContext } from "../../FormContext";
@@ -10,8 +9,6 @@ function Select({
    fieldData
 }: TFieldProps) {
    const { id, validations, condition, dependsOn, label, placeholder, options } = fieldData;
-
-   // const optionRef = useRef<HTMLSelectElement>(null);
 
    // context api
    const {formDataState, setFormDataState} = useFormDataStateContext();
@@ -26,8 +23,6 @@ function Select({
    const conditionOperator = condition?.operator;
    const conditionValue = condition?.value;
 
-   const showField = isVisible(formDataState[conditionField!], conditionOperator!, conditionValue!);
-
    const isChanged = checkDependsOn(
       formDataState,
       prevFormDataState,
@@ -40,15 +35,8 @@ function Select({
          resetField(id!, { keepDirty: false });
       }
    }, [isChanged, resetField, id]);
-   
-   // if (dependsOn) {
-   //    const isChanged = checkDependsOn(formDataState, prevFormDataState, dependsOn, getData('dependencyTree'));
-   //    if (isChanged && optionRef.current) {
-   //       optionRef.current.value = "";
-   //    }
-   // }
 
-   if (!showField) {
+   if (!isVisible(formDataState[conditionField!], conditionOperator!, conditionValue!)) {
       delete formDataState[id!];
       return (
          <></>
@@ -73,7 +61,6 @@ function Select({
                ...formDataState,
                [id!]: e.target.value,
             })}}
-            // ref={optionRef}
          >
             <option key={placeholder} value="">{placeholder}</option>
             {options?.map(option => {

@@ -17,7 +17,7 @@ export function createDependencyTree(fieldData: TField[]) {
       tree[fieldData[key].id] = fieldData[key].dependsOn!;
    }
    // console.log(tree);
-   return tree;
+   setData('dependencyTree', JSON.stringify(tree));
 }
 
 export function isRequired(validations: TValidation[] | undefined) {

@@ -17,7 +17,7 @@ function Radio({
    const rules = mapValidationsToRules(validations);
 
    // data passing globally
-   const {formDataState, setFormDataState} = useFormDataStateContext();
+   const { formDataState, setFormDataState } = useFormDataStateContext();
 
    return (
       <div className="mt-3">
