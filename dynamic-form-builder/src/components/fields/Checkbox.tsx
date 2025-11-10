@@ -1,4 +1,4 @@
-import { useFormDataState } from "../../FormContext";
+import { useFormDataStateContext } from "../../FormContext";
 import { useState } from 'react';
 import type { TFieldProps } from "../../utils/types";
 
@@ -7,7 +7,7 @@ function Checkbox({
 }: TFieldProps) {
    const { id, defaultValue, name, label } = fieldData;
 
-   const {formDataState, setFormDataState} = useFormDataState();
+   const {formDataState, setFormDataState} = useFormDataStateContext();
    const [check, setCheck] = useState(Boolean(defaultValue));
 
    return (

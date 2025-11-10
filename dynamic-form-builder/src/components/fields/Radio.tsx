@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { TFieldProps, TOption } from "../../utils/types";
 import { useFormContext } from "react-hook-form";
 import { isRequired, mapValidationsToRules } from "../../utils/shared";
-import { useFormDataState } from "../../FormContext";
+import { useFormDataStateContext } from "../../FormContext";
 
 
 function Radio({
@@ -17,7 +17,7 @@ function Radio({
    const rules = mapValidationsToRules(validations);
 
    // data passing globally
-   const {formDataState, setFormDataState} = useFormDataState();
+   const {formDataState, setFormDataState} = useFormDataStateContext();
 
    return (
       <div className="mt-3">

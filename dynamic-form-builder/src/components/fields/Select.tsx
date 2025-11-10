@@ -1,9 +1,9 @@
 // import { useState } from "react";
 import { checkDependsOn, getData, isRequired, isVisible, mapValidationsToRules } from "../../utils/shared";
 import type { TFieldProps } from "../../utils/types";
-import { useFormDataState } from "../../FormContext";
+import { useFormDataStateContext } from "../../FormContext";
 import { useFormContext } from "react-hook-form";
-import { usePrevFormDataState } from "../../PrevFormContext";
+import { usePrevFormDataStateContext } from "../../PrevFormContext";
 import { useEffect } from "react";
 
 function Select({
@@ -14,8 +14,8 @@ function Select({
    // const optionRef = useRef<HTMLSelectElement>(null);
 
    // context api
-   const {formDataState, setFormDataState} = useFormDataState();
-   const {prevFormDataState, setPrevFormDataState} = usePrevFormDataState();
+   const {formDataState, setFormDataState} = useFormDataStateContext();
+   const {prevFormDataState, setPrevFormDataState} = usePrevFormDataStateContext();
 
    // validation
    const { register, formState: { errors }, resetField } = useFormContext();

@@ -40,32 +40,30 @@ function FormBuilder({formData}: TFormBuilderProps) {
             <div className="text-3xl">{formData.title}</div>
             <form onSubmit={handleSubmit(onSubmit)}>
                {fieldData.map((field) => {
-                  switch(field.type) {
-                     case 'radio':
+                  if (field.type === 'radio')
                         return <Radio
                            key={field.id}
                            fieldData={field}
                         />
-                     case 'email':
-                     case 'password':
-                     case 'text':
-                     case 'textarea':
-                     case 'number':
+                  else if (field.type === 'email'
+                     || field.type === 'password'
+                     || field.type === 'text'
+                     || field.type === 'textarea'
+                     || field.type === 'number')
                         return <InputFactory
                            key={field.id}
                            fieldData={field}
                         />
-                     case 'select':
+                  else if (field.type === 'select')
                         return <Select
                            key={field.id}
                            fieldData={field}
                         />
-                     case 'checkbox':
+                  else if (field.type === 'checkbox')
                         return <Checkbox
                            key={field.id}
                            fieldData={field}
                         />
-                  }
                })}
 
                <input type="submit" 

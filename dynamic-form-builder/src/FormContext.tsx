@@ -14,7 +14,7 @@ export const FormDataProvider = ({ children }: { children: React.ReactNode }) =>
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const useFormDataState = () => {
+export const useFormDataStateContext = () => {
   const context = useContext(FormDataContext);
   if (!context) throw new Error("Error in context");
   return context;
